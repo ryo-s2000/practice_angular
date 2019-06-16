@@ -1,23 +1,15 @@
 import { Component } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'my-app',
-  template: `<div [innerHTML]="msg"></div>`,
+  template: `<div class="line back" [class.fore]="flag">WINGSプロジェクト</div>`,
+  styles: [`
+  	.line { border: solid 1px #f00; }
+  	.back { background-color: #0ff; }
+  	.fore { color: red; }
+  `]
 })
-export class AppComponent  { 
-	safeMsg: SafeHtml;
-
-	msg : string = `<script>window.alert("ようこそ！");</script>
-	<div style="font-size:20px;">
-		<p>WINGS</p>
-	</div>
-	<a href="http://www.wings.msn.to/">Web</a>
-	<button>同意する</button>
-	<input type="button" onclick="alert('OK')" value="クリック" />;
-	`
-
-	constructor(private sanitizer: DomSanitizer){
-		this.safeMsg = sanitizer.bypassSecurityTrustHtml(this.msg);
-	}
+export class AppComponent  {
+	flag = true;
+	clazz = 'fore';
 }
