@@ -3,26 +3,18 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'my-app',
   template: `
-  <form>
-  	<label for="key">キー入力：</label>
-  	<input id="key" name="key" (keydown)="show($event)" />
-  </form>
-  <div>キーコード：{{which}}</div>
-  <div [hidden]="!altKey">[Alt]</div>
-  <div [hidden]="!ctrlKey">[Ctrl]</div>
-  <div [hidden]="!shiftKey">[Shift]</div>
+  <input #txt id="txt" name="txt" type="text" (keyup.enter)="show(txt.value)" />
+  <ul [innerHTML]="msg"></ul>
+
+  <label>苗字：<input  #last  type="text" (change)="0" /></label><br />
+  <label>名前：<input  #first type="text" (change)="0" /></label>
+  <div>こんにちは、{{last.value}}{{first.value}}さん！</div>
   `
 })
 export class AppComponent  {
-	which = '';
-	altKey = false;
-	ctrKey = false;
-	shiftKey = false;
+	msg = '';
 
-	show(e: any){
-		this.which = e.which;
-		this.altKey = e.altKey;
-		this.ctrlKey = e.ctrlKey;
-		this.shiftKey = e.shiftKey;
+	show(input: any){
+		this.msg += `<li>${input}</li>`;
 	}
 }
