@@ -3,18 +3,22 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'my-app',
   template: `
-  <form>
-  	<label for="show">表示：非表示</label>
-  	<input id="show" name="show" type="checkbox" [(ngModel)] = "show" />
-  </form>
-  <div *ngIf="show; else elseContent">
-  	<p>hogehoge</p>
+  <select name="season" [(ngModel)]="season">
+  	<option value="">選択してください。</option>
+  	<option value="spring">春</option>
+  	<option value="summer">夏</option>
+  	<option value="autumn">秋</option>
+  	<option value="winter">冬</option>
+  </select>
+  <div [ngSwitch]="season">
+  	<span *ngSwitchCase="'spring'">トレッキング</span>
+  	<span *ngSwitchCase="'summer'">海</span>
+  	<span *ngSwitchCase="'autumn'">紅葉狩り</span>
+  	<span *ngSwitchCase="'winter'">スキー</span>
+  	<span *ngSwitchDeafault>選択して</span>
   </div>
-  <ng-template #elseContent>
-  	<h3 style="color:Red;">非表示中だよ</h3>
-  </ng-template>
   `
 })
 export class AppComponent  {
-	show = false;
+	season = '';
 }
