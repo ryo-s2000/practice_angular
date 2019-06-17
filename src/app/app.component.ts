@@ -3,13 +3,13 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'my-app',
   template: `
-  <form>
-  	<label for="name">名前：</label>
-  	<input id="name"  name="name"  type="text"  [(ngModel)]="myName" />
-  	<div>こんにちは、{{myName}}さん！</div>
-  </form>
+  <ul>
+  	<li>{{current | date }}</li>
+  	<li>{{current | date : "medium" }}</li>
+  	<li>{{current | date : "y MM dd (EEE) "}}</li>
+  </ul>
   `
 })
 export class AppComponent  {
-	myName = '山田';
+	current = new Date()
 }
