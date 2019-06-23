@@ -1,58 +1,62 @@
-import { Component } from '@angular/core';
-import { Book } from './book';
+import { Component, OnChanges, OnInit, DoCheck,
+  AfterContentInit, AfterContentChecked, 
+  AfterViewInit, AfterViewChecked, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'my-app',
   template: `
     <div>
-      <span *ngFor="let b of books">
-        ［<a href="#" (click)="onclick(b)">{{b.title}}</a>］
-      </span>
+      <label>表示／非表示
+        <input type="checkbox" (change)="onchange()" checked />
+      </label>
     </div>
-    <hr />
-    <p>編集中：{{ edit.item?.title }}</p>
-    <edit-book #edit [item]="selected" (edit)="onedited($event)"></edit-book>
+    <my-child [time]="current" *ngIf="show"></my-child>
   `,
 })
-export class AppComponent {
-  selected: Book;
+export class AppComponent implements OnChanges,
+  OnInit, DoCheck, AfterContentInit, AfterContentChecked,
+  AfterViewInit, AfterViewChecked, OnDestroy {
+  show = true;
+  current = new Date();
 
-  books: Book[] = [
-    {
-      isbn: '978-4-7741-8411-1',
-      title: '改訂新版JavaScript本格入門',
-    },
-    {
-      isbn: '978-4-7980-4853-6',
-      title: 'はじめてのAndroidアプリ開発 第2版',
-    },
-    {
-      isbn: '978-4-7741-8030-4',
-      title: '［改訂新版］Javaポケットリファレンス',
-    },
-    {
-      isbn: '978-4-7981-3547-2',
-      title: '独習PHP 第3版',
-    },        
-    {
-      isbn: '978-4-8222-9893-7',
-      title: '基礎からしっかり学ぶC++の教科書',
-    }
-  ];
-
-  onclick(book: Book) {
-    this.selected = {
-      isbn: book.isbn,
-      title: book.title
-    };
+  onchange() {
+    this.show = !this.show;
+    this.current = new Date();
   }
 
-  onedited(book: Book){
-    for(let item of this.books){
-      if(item.isbn === book.isbn){
-        item.title = book.title;
-      }
-    }
-    this.selected = null;
+  constructor() {
+    console.log('constructor');
+   }
+
+  ngOnInit() {
+    console.log('ngOnInit');
+  }
+
+  ngOnChanges() {
+    console.log('ngOnChanges');
+  }
+
+  ngDoCheck() {
+    console.log('ngDoCheck');
+  }
+
+  ngAfterContentInit() {
+    console.log('ngAfterContentInit');
+  }
+
+  ngAfterContentChecked() {
+    console.log('ngAfterContentChecked');
+  }
+
+  ngAfterViewInit() {
+    console.log('ngAfterViewInit');
+  }
+
+  ngAfterViewChecked() {
+    console.log('ngAfterViewChecked');
+  }
+
+  ngOnDestroy() {
+    console.log('ngOnDestroy');
   }
 }
