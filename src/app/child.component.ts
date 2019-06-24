@@ -1,15 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
   
   @Component({
     selector: 'my-child',
     template: `
     <div>
-        三行詩{{index}}:<input name="poem" [(ngModel)]="poem" size="20" />
+        1行詩<input name="poem1" [(ngModel)]="poem" size="20" />
     </div>
     `,
   })
   export class ChildComponent{
-     @Input() index: number;
-
      poem: string;
   }

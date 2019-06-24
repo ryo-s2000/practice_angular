@@ -3,12 +3,17 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'my-app',
   template: `
-    <my-content>
-      <span class="header">参加せえへん？</span>
-      <span class="attention">メンバー募集中</span>
-      <small>連絡先：hogehoge@gmail.com</small>
-    </my-content>
+    <my-parent>
+      <my-child></my-child>
+    </my-parent>
   `,
+  styles: [`
+    div{
+      font-size: 150%;
+      text-decoration: underline;
+      color: #369;
+    }
+  `]
 })
 export class AppComponent{
 }
